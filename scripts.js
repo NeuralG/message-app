@@ -12,6 +12,7 @@ const MessagesDB = ref(database, "MesajDeneme")
 
 const sendButton = document.getElementById("send-button")
 const messageInput = document.getElementById("message-input")
+const nameInput = document.getElementById("name-input")
 const messages = document.getElementById("messages")
 
 onValue(MessagesDB, function(snapshot) {
@@ -33,11 +34,28 @@ function appendItemToMessages(value){
 }
 
 sendButton.addEventListener("click" ,function(){
-    let message = messageInput.value 
-    if (message){
-        push(MessagesDB,message)
+    let message = messageInput.value
+    let name =  nameInput.value
+    let output = name + ": " + message
+    if (message && name){
+        push(MessagesDB,output)
         messageInput.value = ""
     }
 
 })
+
+messageInput.addEventListener("keypress" ,function(event){
+
+    if (event.key === "Enter") {
+        event.preventDefault()
+        let message = messageInput.value
+        let name =  nameInput.value
+        let output = name + ": " + message
+        if (message && name){
+            push(MessagesDB,output)
+            messageInput.value = ""
+    }}
+
+})
+
 
