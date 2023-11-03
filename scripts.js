@@ -30,7 +30,10 @@ onValue(MessagesDB, function(snapshot) {
 })
 
 function appendItemToMessages(value){
-    messages.innerHTML += `<li class="message">${value}</li>`
+    let messageEl = document.createElement("li");
+    messageEl.classList.add("message");
+    messageEl.textContent = value;
+    messages.appendChild(messageEl)
 }
 
 sendButton.addEventListener("click" ,function(){
